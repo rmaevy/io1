@@ -58,6 +58,8 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            /* Förhindrar ryckighet vid scroll */
+            scroll-margin-top: 20px; 
         }
         
         .feature-card:hover { border-top-color: var(--red); transform: translateY(-5px); }
@@ -206,19 +208,30 @@
     <footer><p>IO1 AB <span class="footer-sep">|</span> hi [a] io1.se <span class="footer-sep">|</span> SWEDEN</p></footer>
 
     <script>
-        // Hitta alla kort
         const cards = document.querySelectorAll('.feature-card');
 
         cards.forEach(card => {
             card.addEventListener('click', () => {
-                // Om kortet vi klickar på redan är aktivt, stäng det bara
-                if (card.classList.contains('active')) {
-                    card.classList.remove('active');
-                } else {
-                    // Annars: Stäng ALLA kort först...
-                    cards.forEach(c => c.classList.remove('active'));
-                    // ...och öppna det vi klickade på
+                const isActive = card.classList.contains('active');
+                
+                // Stäng alla kort
+                cards.forEach(c => c.classList.remove('active'));
+
+                // Om det klickade kortet inte var aktivt, öppna det
+                if (!isActive) {
                     card.classList.add('active');
+                    
+                    // --- MOBIL-FIX FÖR SCROLL ---
+                    // Vi kollar om fönstret är under 768px (mobil)
+                    if (window.innerWidth <= 768) {
+                        // Vänta en kort stund så expansionen hunnit börja
+                        setTimeout(() => {
+                            card.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'start' 
+                            });
+                        }, 100);
+                    }
                 }
             });
         });
