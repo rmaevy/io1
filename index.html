@@ -85,9 +85,19 @@
         .feature-img { width: 200px; height: 200px; display: block; margin: 0 auto 20px; object-fit: cover; border-radius: 4px; }
 
         footer { height: 75px; min-height: 75px; background-color: var(--black); display: flex; align-items: center; justify-content: center; color: var(--white); font-family: 'Roboto Mono', monospace; font-size: 0.85rem; flex-shrink: 0; }
-        .footer-sep { color: var(--red) !important; margin: 0 1ch; font-weight: bold; font-family: Arial, sans-serif; }
+        
+        .footer-sep { 
+            color: var(--red) !important; 
+            margin: 0 1ch; 
+            font-weight: bold; 
+            font-family: Arial, sans-serif !important; 
+            display: inline-block !important;
+        }
 
-        @media (max-width: 768px) { footer { height: auto; min-height: 75px; padding: 15px 0; flex-direction: column; } .footer-sep { display: none; } }
+        @media (max-width: 768px) { 
+            footer { height: auto; min-height: 75px; padding: 15px 0; flex-direction: column; } 
+            .footer-sep { display: inline-block; margin: 5px 0; transform: rotate(90deg); } 
+        }
     </style>
 </head>
 <body>
@@ -112,6 +122,6 @@
             <div class="feature-card"><img src="3.jpg" class="feature-img"><h3>Smidiga lösningar</h3><p>Vi levererar tjänster, hårdvara och effektiva lösningar som fungerar direkt i din vardag.</p></div>
         </section>
     </main>
-    <footer><p>IO1 AB <span class="footer-sep">|</span> hi [a] io1.se <span class="footer-sep">|</span> SWEDEN</p></footer>
+    <footer><p>IO1 AB <span class="footer-sep">&#124;</span> hi [a] io1.se <span class="footer-sep">&#124;</span> SWEDEN</p></footer>
 </body>
 </html>
