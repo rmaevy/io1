@@ -51,7 +51,6 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            scroll-margin-top: 20px;
         }
         
         .feature-card:hover { border-top-color: var(--red); transform: translateY(-5px); }
@@ -154,28 +153,12 @@
 
     <script>
         const cards = document.querySelectorAll('.feature-card');
-
         cards.forEach(card => {
-            card.addEventListener('click', function(e) {
+            card.addEventListener('click', function() {
                 const isActive = this.classList.contains('active');
-                
-                // 1. Stäng alla andra kort först
                 cards.forEach(c => c.classList.remove('active'));
-
-                // 2. Om kortet inte var aktivt, öppna det nu
                 if (!isActive) {
                     this.classList.add('active');
-                    
-                    // 3. Scroll-logik för mobil
-                    if (window.innerWidth <= 768) {
-                        // Vi använder en timer för att låta webbläsaren rendera den nya höjden först
-                        setTimeout(() => {
-                            const yOffset = -20; // Hur många pixlar marginal från toppen
-                            const y = this.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                            
-                            window.scrollTo({ top: y, behavior: 'smooth' });
-                        }, 300); // 300ms är lagom för att animationen ska ha kommit en bit
-                    }
                 }
             });
         });
