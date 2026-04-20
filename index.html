@@ -3,100 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IO1 - v1</title>
+    <title>IO1</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --red: #e61921;
-            --black: #000000;
-            --white: #ffffff;
-            --gray: #f9f9f9;
-            --dim-gray: #444;
-        }
-
+        :root { --red: #e61921; --black: #000000; --white: #ffffff; --gray: #f9f9f9; --dim-gray: #444; }
         * { -webkit-font-smoothing: antialiased; box-sizing: border-box; }
 
-        @keyframes textSlideFade {
-            0% { opacity: 0; transform: translateX(-20px); }
-            100% { opacity: 1; transform: translateX(0); }
-        }
+        @keyframes headerSlideUp { 0% { transform: translateY(calc(50vh - 65px)); } 100% { transform: translateY(0); } }
+        @keyframes footerSlideDown { 0% { transform: translateY(calc(-50vh + 37.5px)); } 100% { transform: translateY(0); } }
+        @keyframes mainFadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+        @keyframes textSlideFade { 0% { opacity: 0; transform: translateX(-20px); } 100% { opacity: 1; transform: translateX(0); } }
+        @keyframes lineExpand { 0% { width: 0; opacity: 0; } 1% { opacity: 1; } 100% { width: 100%; opacity: 1; } }
 
-        @keyframes lineExpand {
-            0% { width: 0; opacity: 0; }
-            1% { opacity: 1; }
-            100% { width: 100%; opacity: 1; }
-        }
-
-        @keyframes smoothFadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        html, body { margin: 0; padding: 0; height: 100%; background-color: var(--white); }
+        html, body { margin: 0; padding: 0; height: 100%; background-color: var(--black); overflow-x: hidden; }
         body { font-family: 'Inter', sans-serif; display: flex; flex-direction: column; }
 
-        header { height: 130px; display: flex; align-items: center; justify-content: center; background-color: var(--black); flex-shrink: 0; gap: 20px; }
+        header { height: 130px; display: flex; align-items: center; justify-content: center; background-color: var(--black); z-index: 20; animation: headerSlideUp 1s cubic-bezier(0.85, 0, 0.15, 1) forwards; gap: 20px; flex-shrink: 0; }
         .header-logo { width: 72px; height: 72px; object-fit: contain; }
-        .header-text { color: var(--white); font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; letter-spacing: 2px; margin: 0; line-height: 1; opacity: 0; animation: textSlideFade 0.6s ease-out 0.2s forwards; }
-        .header-line { height: 3px; background-color: var(--white); margin-top: 5px; width: 0; opacity: 0; animation: lineExpand 0.6s ease-out 0.6s forwards; }
+        .header-text { color: var(--white); font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; letter-spacing: 2px; opacity: 0; animation: textSlideFade 0.6s ease-out 1s forwards; margin: 0; line-height: 1; }
+        .header-line { height: 3px; background-color: var(--white); margin-top: 5px; width: 0; opacity: 0; animation: lineExpand 0.6s ease-out 1.4s forwards; }
 
-        main { flex: 1 0 auto; display: flex; flex-direction: column; }
-        .hero { padding: 40px 5% 50px; text-align: center; opacity: 0; animation: smoothFadeIn 0.6s ease-out 0.7s forwards; }
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; margin: 0 0 20px 0; letter-spacing: -2px; line-height: 1.1; color: var(--black); }
+        main { flex: 1 0 auto; background-color: var(--white); opacity: 0; animation: mainFadeIn 0.8s ease-in 0.5s forwards; display: flex; flex-direction: column; }
+        .hero { padding: 40px 5% 50px; text-align: center; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; letter-spacing: -2px; line-height: 1.1; color: var(--black); margin: 0 0 20px 0; }
+        .hero h1 .line-break { display: block; margin-top: 5px; }
         .dot { display: inline-block; width: 0.15em; height: 0.15em; background-color: var(--black); margin-left: 0.05em; vertical-align: baseline; }
         .hero span.highlight { color: var(--red); }
         .hero span.highlight .dot { background-color: var(--red); }
         .hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px; color: var(--dim-gray); line-height: 1.8; }
 
         .cta-container { display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .cta-button { 
-            background-color: var(--black); 
-            color: var(--white); 
-            padding: 16px 36px; 
-            text-decoration: none; 
-            font-weight: 700; 
-            border-radius: 4px; 
-            transition: all 0.2s ease; 
-        }
-        /* Fix för alla knappar i v1 */
+        .cta-button { background-color: var(--black); color: var(--white); padding: 16px 36px; text-decoration: none; font-weight: 700; border-radius: 4px; transition: all 0.2s ease; cursor: pointer; border: none; }
         .cta-button:hover { background-color: var(--red) !important; transform: translateY(-2px); }
 
-        .features { padding: 40px 5%; background-color: var(--gray); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        /* --- Features & Expander Logic --- */
+        .features { padding: 40px 5%; background-color: var(--gray); display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        
         .feature-card { 
             background: var(--white); 
             padding: 40px; 
             border-radius: 8px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
             border-top: 4px solid var(--black); 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
             text-align: center; 
-            opacity: 0;
-            animation: smoothFadeIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.3s ease;
-            will-change: transform;
+            cursor: pointer;
+            overflow: hidden;
+            height: fit-content;
         }
-        .feature-card:nth-child(1) { animation-delay: 0.8s; }
-        .feature-card:nth-child(2) { animation-delay: 1.0s; }
-        .feature-card:nth-child(3) { animation-delay: 1.2s; }
-        .feature-card:hover { border-top-color: var(--red); transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0,0,0,0.12); }
+        
+        .feature-card:hover { border-top-color: var(--red); transform: translateY(-5px); }
 
-        .feature-card h3 { margin-top: 0; font-size: 1.4rem; font-weight: 800; margin-bottom: 15px; color: var(--black); }
-        .feature-card p { text-align: left; color: var(--dim-gray); margin: 0; }
+        .feature-card h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; transition: color 0.3s; }
         .feature-img { width: 200px; height: 200px; display: block; margin: 0 auto 20px; object-fit: cover; border-radius: 4px; }
 
-        footer { height: 75px; min-height: 75px; background-color: var(--black); display: flex; align-items: center; justify-content: center; color: var(--white); font-family: 'Roboto Mono', monospace; font-size: 0.85rem; flex-shrink: 0; }
-        
-        .footer-sep { 
-            color: var(--red) !important; 
-            margin: 0 1ch; 
-            font-weight: bold; 
-            font-family: Arial, sans-serif !important; 
-            display: inline-block !important;
+        /* Hidden Content */
+        .card-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease, margin-top 0.3s ease;
+            text-align: left;
         }
 
+        .feature-card.active .card-content {
+            max-height: 1000px; /* Tillräckligt högt för att rymma allt */
+            opacity: 1;
+            margin-top: 20px;
+        }
+
+        .feature-card.active h3 { color: var(--red); }
+
+        .card-content p { color: var(--dim-gray); line-height: 1.6; margin-bottom: 20px; }
+
+        /* Bullet List Style */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            color: var(--dim-gray);
+            font-size: 0.95rem;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--red);
+            font-weight: bold;
+        }
+
+        /* Indicating Clickability */
+        .expand-indicator {
+            font-size: 0.8rem;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 15px;
+            display: block;
+            transition: opacity 0.3s;
+        }
+        .feature-card.active .expand-indicator { opacity: 0; }
+
+        footer { height: 75px; min-height: 75px; background-color: var(--black); display: flex; align-items: center; justify-content: center; color: var(--white); font-family: 'Roboto Mono', monospace; font-size: 0.85rem; position: relative; animation: footerSlideDown 1s cubic-bezier(0.85, 0, 0.15, 1) forwards; flex-shrink: 0; }
+        .footer-sep { color: var(--red) !important; margin: 0 10px; font-weight: bold; font-family: sans-serif !important; display: inline-block; }
+
         @media (max-width: 768px) { 
-            footer { height: auto; min-height: 75px; padding: 15px 0; flex-direction: column; } 
-            .footer-sep { display: inline-block; margin: 5px 0; transform: rotate(90deg); } 
+            footer { height: auto; min-height: 75px; padding: 20px 0; flex-direction: column; } 
+            .footer-sep { display: inline-block; margin: 5px 0; } 
         }
     </style>
 </head>
@@ -107,21 +128,78 @@
     </header>
     <main>
         <section class="hero">
-            <h1>Inget onödigt fluff<span class="dot"></span><br><span class="highlight">Bara grym IT<span class="dot"></span></span></h1>
+            <h1>Inget onödigt fluff<span class="dot"></span>
+                <span class="line-break">
+                    <span class="highlight">Bara grym IT<span class="dot"></span></span>
+                </span>
+            </h1>
             <p>Vi är det lilla IT-bolaget med låga omkostnader och hög expertis.<br>Hos oss betalar du för resultat, inte för overhead.</p>
             <div class="cta-container">
                 <a href="mailto:info@io1.se" class="cta-button">Kontakta oss</a>
-                <a href="index.html" class="cta-button" style="background:#333; min-width:40px; padding:16px 18px;">v1</a>
-                <a href="index1.html" class="cta-button" style="background:#333; min-width:40px; padding:16px 18px;">v2</a>
-                <a href="index.2.html" class="cta-button" style="background:#333; min-width:40px; padding:16px 18px;">v3</a>
             </div>
         </section>
+
         <section class="features">
-            <div class="feature-card"><img src="1.jpg" class="feature-img"><h3>Låga kostnader</h3><p>Inga flashiga kontor eller dyra säljare. Vi håller kostnaderna nere så att du får mer för pengarna.</p></div>
-            <div class="feature-card"><img src="2.jpg" class="feature-img"><h3>Direktkontakt</h3><p>Skippa projektledare och mellanhänder. Du pratar direkt med experten som löser dina problem.</p></div>
-            <div class="feature-card"><img src="3.jpg" class="feature-img"><h3>Smidiga lösningar</h3><p>Vi levererar tjänster, hårdvara och effektiva lösningar som fungerar direkt i din vardag.</p></div>
+            <div class="feature-card" onclick="toggleCard(this)">
+                <img src="1.jpg" class="feature-img">
+                <h3>Låga kostnader</h3>
+                <div class="card-content">
+                    <p>Inga flashiga kontor eller dyra säljare. Vi håller kostnaderna nere så att du får mer för pengarna.</p>
+                    <ul class="feature-list">
+                        <li>Ingen onödig overhead-kostnad</li>
+                        <li>Direkt fakturering utan mellanhänder</li>
+                        <li>Effektiva digitala processer</li>
+                        <li>Prissättning baserad på värde</li>
+                        <li>Transparent kostnadskontroll</li>
+                    </ul>
+                </div>
+                <span class="expand-indicator">Klicka för att läsa mer</span>
+            </div>
+
+            <div class="feature-card" onclick="toggleCard(this)">
+                <img src="2.jpg" class="feature-img">
+                <h3>Direktkontakt</h3>
+                <div class="card-content">
+                    <p>Skippa projektledare och mellanhänder. Du pratar direkt med experten som löser dina problem.</p>
+                    <ul class="feature-list">
+                        <li>Snabb respons på dina frågor</li>
+                        <li>Personlig teknisk rådgivning</li>
+                        <li>Inga missförstånd via omvägar</li>
+                        <li>Dedikerad kontaktperson</li>
+                        <li>Flexibel support när det behövs</li>
+                    </ul>
+                </div>
+                <span class="expand-indicator">Klicka för att läsa mer</span>
+            </div>
+
+            <div class="feature-card" onclick="toggleCard(this)">
+                <img src="3.jpg" class="feature-img">
+                <h3>Smidiga lösningar</h3>
+                <div class="card-content">
+                    <p>Vi levererar tjänster, hårdvara och effektiva lösningar som fungerar direkt i din vardag.</p>
+                    <ul class="feature-list">
+                        <li>Installation som bara fungerar</li>
+                        <li>Modern hårdvara efter behov</li>
+                        <li>Anpassade molntjänster</li>
+                        <li>Säkerhetskopiering som standard</li>
+                        <li>Framtidssäkrad infrastruktur</li>
+                    </ul>
+                </div>
+                <span class="expand-indicator">Klicka för att läsa mer</span>
+            </div>
         </section>
     </main>
-    <footer><p>IO1 AB <span class="footer-sep">&#124;</span> hi [a] io1.se <span class="footer-sep">&#124;</span> SWEDEN</p></footer>
+    <footer><p>IO1 AB <span class="footer-sep">|</span> hi [a] io1.se <span class="footer-sep">|</span> SWEDEN</p></footer>
+
+    <script>
+        function toggleCard(card) {
+            // Stäng andra kort om du bara vill ha ett öppet åt gången (valfritt)
+            // document.querySelectorAll('.feature-card').forEach(c => {
+            //     if (c !== card) c.classList.remove('active');
+            // });
+            
+            card.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
