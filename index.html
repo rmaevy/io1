@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IO1</title>
+    <title>IO1 - v2</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
@@ -34,50 +34,80 @@
         .hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px; color: var(--dim-gray); line-height: 1.8; }
 
         .cta-container { display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .cta-button { background-color: var(--black); color: var(--white); padding: 16px 36px; text-decoration: none; font-weight: 700; border-radius: 4px; transition: all 0.2s ease; cursor: pointer; border: none; }
+        .cta-button { background-color: var(--black); color: var(--white); padding: 16px 36px; text-decoration: none; font-weight: 700; border-radius: 4px; transition: all 0.2s ease; border: none; }
         .cta-button:hover { background-color: var(--red) !important; transform: translateY(-2px); }
 
-        /* --- Features & Expander Logic --- */
-        .features { padding: 40px 5%; background-color: var(--gray); display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .features { 
+            padding: 40px 5%; 
+            background-color: var(--gray); 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 30px;
+            align-items: flex-start;
+        }
         
         .feature-card { 
             background: var(--white); 
-            padding: 40px; 
+            padding: 30px; 
             border-radius: 8px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
             border-top: 4px solid var(--black); 
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1); 
             text-align: center; 
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
-            height: fit-content;
         }
         
         .feature-card:hover { border-top-color: var(--red); transform: translateY(-5px); }
 
-        .feature-card h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; transition: color 0.3s; }
-        .feature-img { width: 200px; height: 200px; display: block; margin: 0 auto 20px; object-fit: cover; border-radius: 4px; }
+        .feature-card h3 { 
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            color: var(--black);
+            margin: 0 0 15px 0;
+            transition: color 0.3s ease;
+        }
 
-        /* Hidden Content */
-        .card-content {
+        .feature-img { 
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            transition: all 0.5s ease;
+        }
+
+        .card-details {
             max-height: 0;
             opacity: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease, opacity 0.5s ease, margin-top 0.3s ease;
+            transition: max-height 0.6s ease, opacity 0.4s ease, margin-top 0.4s ease;
             text-align: left;
         }
 
-        .feature-card.active .card-content {
-            max-height: 1000px; /* Tillräckligt högt för att rymma allt */
-            opacity: 1;
-            margin-top: 20px;
+        /* --- Aktivt tillstånd (Vid Klick) --- */
+        .feature-card.active {
+            border-top-color: var(--red);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
         }
 
         .feature-card.active h3 { color: var(--red); }
 
-        .card-content p { color: var(--dim-gray); line-height: 1.6; margin-bottom: 20px; }
+        .feature-card.active .feature-img { 
+            height: 100px; 
+            opacity: 0.5;
+            margin-bottom: 10px; /* Minskad från 20px */
+        }
 
-        /* Bullet List Style */
+        .feature-card.active .card-details {
+            max-height: 800px;
+            opacity: 1;
+            margin-top: 5px; /* Tajtare distans mot bilden */
+        }
+
+        .card-details p { color: var(--dim-gray); line-height: 1.6; margin-bottom: 15px; font-size: 0.95rem; }
+
         .feature-list {
             list-style: none;
             padding: 0;
@@ -87,9 +117,9 @@
         .feature-list li {
             position: relative;
             padding-left: 25px;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             color: var(--dim-gray);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .feature-list li::before {
@@ -97,27 +127,15 @@
             position: absolute;
             left: 0;
             color: var(--red);
-            font-weight: bold;
+            font-weight: 900;
         }
-
-        /* Indicating Clickability */
-        .expand-indicator {
-            font-size: 0.8rem;
-            color: #ccc;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 15px;
-            display: block;
-            transition: opacity 0.3s;
-        }
-        .feature-card.active .expand-indicator { opacity: 0; }
 
         footer { height: 75px; min-height: 75px; background-color: var(--black); display: flex; align-items: center; justify-content: center; color: var(--white); font-family: 'Roboto Mono', monospace; font-size: 0.85rem; position: relative; animation: footerSlideDown 1s cubic-bezier(0.85, 0, 0.15, 1) forwards; flex-shrink: 0; }
         .footer-sep { color: var(--red) !important; margin: 0 10px; font-weight: bold; font-family: sans-serif !important; display: inline-block; }
 
         @media (max-width: 768px) { 
             footer { height: auto; min-height: 75px; padding: 20px 0; flex-direction: column; } 
-            .footer-sep { display: inline-block; margin: 5px 0; } 
+            .footer-sep { display: none; } 
         }
     </style>
 </head>
@@ -140,66 +158,52 @@
         </section>
 
         <section class="features">
-            <div class="feature-card" onclick="toggleCard(this)">
-                <img src="1.jpg" class="feature-img">
+            <div class="feature-card" onclick="this.classList.toggle('active')">
                 <h3>Låga kostnader</h3>
-                <div class="card-content">
+                <img src="1.jpg" class="feature-img">
+                <div class="card-details">
                     <p>Inga flashiga kontor eller dyra säljare. Vi håller kostnaderna nere så att du får mer för pengarna.</p>
                     <ul class="feature-list">
-                        <li>Ingen onödig overhead-kostnad</li>
-                        <li>Direkt fakturering utan mellanhänder</li>
-                        <li>Effektiva digitala processer</li>
-                        <li>Prissättning baserad på värde</li>
-                        <li>Transparent kostnadskontroll</li>
+                        <li>Ingen onödig overhead</li>
+                        <li>Direkt fakturering</li>
+                        <li>Digitala processer</li>
+                        <li>Värdebaserad prissättning</li>
+                        <li>Transparent kontroll</li>
                     </ul>
                 </div>
-                <span class="expand-indicator">Klicka för att läsa mer</span>
             </div>
 
-            <div class="feature-card" onclick="toggleCard(this)">
-                <img src="2.jpg" class="feature-img">
+            <div class="feature-card" onclick="this.classList.toggle('active')">
                 <h3>Direktkontakt</h3>
-                <div class="card-content">
+                <img src="2.jpg" class="feature-img">
+                <div class="card-details">
                     <p>Skippa projektledare och mellanhänder. Du pratar direkt med experten som löser dina problem.</p>
                     <ul class="feature-list">
-                        <li>Snabb respons på dina frågor</li>
-                        <li>Personlig teknisk rådgivning</li>
-                        <li>Inga missförstånd via omvägar</li>
-                        <li>Dedikerad kontaktperson</li>
-                        <li>Flexibel support när det behövs</li>
+                        <li>Snabb respons</li>
+                        <li>Teknisk rådgivning</li>
+                        <li>Inga mellanhänder</li>
+                        <li>Dedikerad kontakt</li>
+                        <li>Flexibel support</li>
                     </ul>
                 </div>
-                <span class="expand-indicator">Klicka för att läsa mer</span>
             </div>
 
-            <div class="feature-card" onclick="toggleCard(this)">
-                <img src="3.jpg" class="feature-img">
+            <div class="feature-card" onclick="this.classList.toggle('active')">
                 <h3>Smidiga lösningar</h3>
-                <div class="card-content">
+                <img src="3.jpg" class="feature-img">
+                <div class="card-details">
                     <p>Vi levererar tjänster, hårdvara och effektiva lösningar som fungerar direkt i din vardag.</p>
                     <ul class="feature-list">
-                        <li>Installation som bara fungerar</li>
-                        <li>Modern hårdvara efter behov</li>
-                        <li>Anpassade molntjänster</li>
-                        <li>Säkerhetskopiering som standard</li>
-                        <li>Framtidssäkrad infrastruktur</li>
+                        <li>Plug-and-play-tänk</li>
+                        <li>Hårdvara efter behov</li>
+                        <li>Moderna molntjänster</li>
+                        <li>Säkerhet som standard</li>
+                        <li>Framtidssäkrad teknik</li>
                     </ul>
                 </div>
-                <span class="expand-indicator">Klicka för att läsa mer</span>
             </div>
         </section>
     </main>
     <footer><p>IO1 AB <span class="footer-sep">|</span> hi [a] io1.se <span class="footer-sep">|</span> SWEDEN</p></footer>
-
-    <script>
-        function toggleCard(card) {
-            // Stäng andra kort om du bara vill ha ett öppet åt gången (valfritt)
-            // document.querySelectorAll('.feature-card').forEach(c => {
-            //     if (c !== card) c.classList.remove('active');
-            // });
-            
-            card.classList.toggle('active');
-        }
-    </script>
 </body>
 </html>
