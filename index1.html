@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IO1 - v2</title>
+    
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -137,18 +140,22 @@
             animation: footerSlideDown 1s cubic-bezier(0.85, 0, 0.15, 1) forwards;
         }
 
-        /* --- FIX FÖR RÖDA PIPES PÅ MOBIL --- */
+        /* --- NY FIX FÖR RÖDA PIPES --- */
+        /* Vi tar bort text-tecknet helt och ritar en linje istället */
         .footer-sep { 
-            color: var(--red) !important; 
-            margin: 0 0.5ch; 
-            font-weight: bold;
-            display: inline-block; /* Tvingar mobilen att rendera färgen rätt */
+            display: inline-block;
+            width: 0;
+            height: 1.2em;
+            border-left: 2px solid var(--red);
+            margin: 0 15px;
+            vertical-align: middle;
         }
 
         @media (max-width: 768px) {
             header { height: 130px !important; }
             footer { height: auto; min-height: 75px; padding: 15px 0; flex-direction: column; }
-            .footer-sep { display: none; }
+            /* Döljer linjen på mobil om du kör stacked layout, eller behåll om du vill ha den mellan rader */
+            .footer-sep { display: none; } 
         }
     </style>
 </head>
@@ -192,6 +199,8 @@
             </div>
         </section>
     </main>
-    <footer><p>IO1 AB <span class="footer-sep">|</span> hi [a] io1.se <span class="footer-sep">|</span> SWEDEN</p></footer>
+    <footer>
+        <p>IO1 AB <span class="footer-sep"></span> hi [a] io1.se <span class="footer-sep"></span> SWEDEN</p>
+    </footer>
 </body>
 </html>
