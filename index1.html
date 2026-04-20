@@ -15,16 +15,14 @@
         }
 
         /* --- Animationer --- */
-        
-        /* Vi animerar 'top' istället för 'transform' för att nollställa flödet vid landning */
         @keyframes headerSlideUp {
-            0% { top: calc(50vh - 75px); }
-            100% { top: 0; }
+            0% { transform: translateY(calc(50vh - 75px)); }
+            100% { transform: translateY(0); }
         }
 
         @keyframes footerSlideDown {
-            0% { bottom: calc(50vh - 50px); }
-            100% { bottom: 0; }
+            0% { transform: translateY(calc(-50vh + 50px)); }
+            100% { transform: translateY(0); }
         }
 
         @keyframes mainFadeIn {
@@ -43,47 +41,54 @@
             100% { width: 100%; opacity: 1; }
         }
 
+        /* Grundinställningar för att matcha v1 exakt */
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
             background-color: var(--black);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
             font-family: 'Inter', sans-serif;
             display: flex;
             flex-direction: column;
-            position: relative;
         }
 
-        /* --- Header: Matchar v1 exakt --- */
+        /* --- Header: Tvingad till 150px oavsett enhet --- */
         header {
             height: 150px;
-            width: 100%;
+            min-height: 150px;
+            max-height: 150px;
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: var(--black);
-            z-index: 100;
+            z-index: 20;
             gap: 20px;
             flex-shrink: 0;
-            /* Animation inställd för att landa statiskt */
-            position: fixed; 
-            top: calc(50vh - 75px);
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            position: relative;
             animation: headerSlideUp 1s cubic-bezier(0.85, 0, 0.15, 1) forwards;
         }
 
         .header-logo {
             width: 72px;
             height: 72px;
+            display: block;
             object-fit: contain;
+            margin: 0; /* Hindrar extra utrymme */
         }
 
         .header-text-container {
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            margin: 0;
         }
 
         .header-text {
@@ -92,6 +97,7 @@
             font-weight: 900;
             letter-spacing: 2px;
             margin: 0;
+            padding: 0;
             line-height: 1;
             opacity: 0;
             animation: textSlideFade 0.6s ease-out 1s forwards;
@@ -106,21 +112,15 @@
             animation: lineExpand 0.6s ease-out 1.4s forwards;
         }
 
-        /* --- Spacer: Skapar utrymmet som header tar upp efter landning --- */
-        .header-spacer {
-            height: 150px;
-            flex-shrink: 0;
-        }
-
         /* --- Main Content --- */
         main {
-            flex: 1;
+            flex: 1 0 auto;
             background-color: var(--white);
             opacity: 0;
             animation: mainFadeIn 0.8s ease-in 0.5s forwards;
             display: flex;
             flex-direction: column;
-            z-index: 10;
+            z-index: 1;
         }
 
         .hero {
@@ -210,6 +210,11 @@
         .feature-card:hover {
             border-top-color: var(--red);
             transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .feature-card:hover .feature-img {
+            transform: scale(1.05);
         }
 
         .feature-card h3 {
@@ -229,7 +234,7 @@
         /* --- Footer --- */
         footer {
             height: 100px;
-            width: 100%;
+            min-height: 100px;
             background-color: var(--black);
             display: flex;
             align-items: center;
@@ -237,15 +242,10 @@
             color: var(--white);
             font-family: 'Roboto Mono', monospace;
             font-size: 0.85rem;
-            z-index: 100;
-            position: fixed;
-            bottom: calc(50vh - 50px);
-            animation: footerSlideDown 1s cubic-bezier(0.85, 0, 0.15, 1) forwards;
-        }
-
-        .footer-spacer {
-            height: 100px;
+            z-index: 20;
             flex-shrink: 0;
+            margin: 0;
+            animation: footerSlideDown 1s cubic-bezier(0.85, 0, 0.15, 1) forwards;
         }
 
         .footer-sep {
@@ -254,10 +254,16 @@
             font-weight: bold;
         }
 
-        /* --- Mobiljusteringar --- */
+        /* --- Mobiljusteringar: Matchar v1 till 100% --- */
         @media (max-width: 768px) {
-            header, .header-spacer { height: 150px; }
-            .header-logo { width: 72px; height: 72px; }
+            header { 
+                height: 150px !important; 
+                gap: 15px; 
+            }
+            .header-logo { 
+                width: 72px; 
+                height: 72px; 
+            }
             footer { 
                 flex-direction: column; 
                 text-align: center; 
@@ -265,8 +271,8 @@
                 min-height: 100px;
                 padding: 20px 0; 
             }
-            .footer-spacer { height: 100px; }
             .footer-sep { display: none; }
+            .cta-container { gap: 8px; }
         }
     </style>
 </head>
@@ -280,12 +286,10 @@
         </div>
     </header>
 
-    <div class="header-spacer"></div>
-
     <main>
         <section class="hero">
-            <h1>Inget onödigt fluff<br>
-                <span style="color: var(--red);">Bara grym IT</span>
+            <h1>Inget onödigt fluff<span class="dot"></span><br>
+                <span class="highlight">Bara grym IT<span class="dot"></span></span>
             </h1>
             <p>Vi är det lilla IT-bolaget med låga omkostnader och hög expertis.<br>
             Hos oss betalar du för resultat, inte för overhead.</p>
@@ -300,24 +304,23 @@
 
         <section class="features">
             <div class="feature-card">
-                <img src="1.jpg" alt="IT" class="feature-img">
+                <img src="1.jpg" alt="Låga kostnader" class="feature-img">
                 <h3>Låga kostnader</h3>
-                <p>Inga flashiga kontor. Vi håller kostnaderna nere.</p>
+                <p>Inga flashiga kontor eller dyra säljare. Vi håller kostnaderna nere så att du får mer för pengarna.</p>
             </div>
             <div class="feature-card">
-                <img src="2.jpg" alt="IT" class="feature-img">
+                <img src="2.jpg" alt="Direktkontakt" class="feature-img">
                 <h3>Direktkontakt</h3>
-                <p>Du pratar direkt med experten.</p>
+                <p>Skippa projektledare och mellanhänder. Du pratar direkt med experten som löser dina problem.</p>
             </div>
             <div class="feature-card">
-                <img src="3.jpg" alt="IT" class="feature-img">
+                <img src="3.jpg" alt="Smidiga lösningar" class="feature-img">
                 <h3>Smidiga lösningar</h3>
-                <p>Vi levererar tjänster som fungerar.</p>
+                <p>Vi levererar tjänster, hårdvara och effektiva lösningar som fungerar direkt i din vardag.</p>
             </div>
         </section>
     </main>
 
-    <div class="footer-spacer"></div>
     <footer>
         <p>IO1 AB <span class="footer-sep">|</span> hi [a] io1.se <span class="footer-sep">|</span> SWEDEN</p>
     </footer>
