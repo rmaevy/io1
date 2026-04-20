@@ -25,19 +25,25 @@
         .header-line { height: 3px; background-color: var(--white); margin-top: 5px; width: 0; opacity: 0; animation: lineExpand 0.6s ease-out 1.4s forwards; }
 
         main { flex: 1 0 auto; background-color: var(--white); opacity: 0; animation: mainFadeIn 0.8s ease-in 0.5s forwards; display: flex; flex-direction: column; }
-        
-        /* Justerad padding för att Hero inte ska sitta för lågt */
         .hero { padding: 40px 5% 50px; text-align: center; }
-        
         .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; letter-spacing: -2px; line-height: 1.1; color: var(--black); margin: 0 0 20px 0; }
         .dot { display: inline-block; width: 0.15em; height: 0.15em; background-color: var(--black); margin-left: 0.05em; vertical-align: baseline; }
         .hero span.highlight { color: var(--red); }
         .hero span.highlight .dot { background-color: var(--red); }
-
         .hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px; color: var(--dim-gray); line-height: 1.8; }
+
         .cta-container { display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .cta-button { background-color: var(--black); color: var(--white); padding: 16px 36px; text-decoration: none; font-weight: 700; border-radius: 4px; transition: all 0.2s ease; }
-        .cta-button:hover { background-color: var(--red); transform: translateY(-2px); }
+        .cta-button { 
+            background-color: var(--black); 
+            color: var(--white); 
+            padding: 16px 36px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            border-radius: 4px; 
+            transition: all 0.2s ease; 
+        }
+        /* Fix för alla knappar i v2 */
+        .cta-button:hover { background-color: var(--red) !important; transform: translateY(-2px); }
 
         .features { padding: 40px 5%; background-color: var(--gray); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .feature-card { background: var(--white); padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 4px solid var(--black); transition: all 0.3s ease; text-align: center; }
