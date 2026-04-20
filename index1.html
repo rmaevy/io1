@@ -55,16 +55,16 @@
             flex-direction: column;
         }
 
-        /* --- Header: Matchar v1 exakt --- */
+        /* --- Header --- */
         header {
-            height: 150px; /* Samma fasta höjd som v1 */
+            height: 150px;
             display: flex;
-            align-items: center; /* Centrerar logga/text vertikalt */
+            align-items: center;
             justify-content: center;
             background-color: var(--black);
             z-index: 10;
             gap: 20px;
-            flex-shrink: 0; /* Hindrar krympning */
+            flex-shrink: 0;
             animation: headerSlideUp 1s cubic-bezier(0.85, 0, 0.15, 1) forwards;
         }
 
@@ -250,11 +250,24 @@
             font-weight: bold;
         }
 
+        /* --- Mobiljusteringar: Synkade med v1 --- */
         @media (max-width: 768px) {
-            header { height: 120px; gap: 15px; }
-            .header-logo { width: 52px; height: 52px; }
-            footer { flex-direction: column; text-align: center; height: auto; padding: 20px 0; }
+            header { 
+                height: 150px; /* Samma höjd som desktop och v1 */
+                gap: 15px; 
+            }
+            .header-logo { 
+                width: 72px; /* Samma logostorlek som v1 */
+                height: 72px; 
+            }
+            footer { 
+                flex-direction: column; 
+                text-align: center; 
+                height: auto; 
+                padding: 20px 0; 
+            }
             .footer-sep { display: none; }
+            .cta-container { gap: 8px; }
         }
     </style>
 </head>
