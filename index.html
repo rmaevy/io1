@@ -157,7 +157,7 @@
         </section>
 
         <section class="features">
-            <div class="feature-card" onclick="this.classList.toggle('active')">
+            <div class="feature-card">
                 <h3>Låga kostnader</h3>
                 <img src="1.jpg" class="feature-img">
                 <div class="card-details">
@@ -172,7 +172,7 @@
                 </div>
             </div>
 
-            <div class="feature-card" onclick="this.classList.toggle('active')">
+            <div class="feature-card">
                 <h3>Direktkontakt</h3>
                 <img src="2.jpg" class="feature-img">
                 <div class="card-details">
@@ -187,7 +187,7 @@
                 </div>
             </div>
 
-            <div class="feature-card" onclick="this.classList.toggle('active')">
+            <div class="feature-card">
                 <h3>Smidiga lösningar</h3>
                 <img src="3.jpg" class="feature-img">
                 <div class="card-details">
@@ -204,5 +204,24 @@
         </section>
     </main>
     <footer><p>IO1 AB <span class="footer-sep">|</span> hi [a] io1.se <span class="footer-sep">|</span> SWEDEN</p></footer>
+
+    <script>
+        // Hitta alla kort
+        const cards = document.querySelectorAll('.feature-card');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Om kortet vi klickar på redan är aktivt, stäng det bara
+                if (card.classList.contains('active')) {
+                    card.classList.remove('active');
+                } else {
+                    // Annars: Stäng ALLA kort först...
+                    cards.forEach(c => c.classList.remove('active'));
+                    // ...och öppna det vi klickade på
+                    card.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
