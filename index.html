@@ -36,6 +36,13 @@
             justify-content: center;
             background-color: var(--black);
             flex-shrink: 0;
+            gap: 20px; 
+        }
+
+        .header-logo {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
         }
 
         .header-text {
@@ -45,6 +52,8 @@
             letter-spacing: 2px; 
             margin: 0;
             line-height: 1;
+            border-bottom: 3px solid var(--white);
+            padding-bottom: 5px;
         }
 
         main {
@@ -52,28 +61,8 @@
         }
 
         .hero {
-            padding: 100px 5% 120px;
+            padding: 50px 5% 80px; 
             text-align: center;
-        }
-
-        .brand-eyebrow {
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 5px;
-            color: var(--black);
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .brand-eyebrow::after {
-            content: "";
-            width: 30px;
-            height: 3px;
-            background-color: var(--red);
         }
 
         .hero h1 {
@@ -125,11 +114,12 @@
             transform: translateY(-2px);
         }
 
+        /* Justerat padding till 40px här */
         .features {
-            padding: 100px 5%;
+            padding: 40px 5%; 
             background-color: var(--gray);
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
@@ -138,16 +128,29 @@
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            /* Standard färg på linjen */
             border-top: 4px solid var(--black); 
             transition: all 0.3s ease; 
+            text-align: center;
         }
 
-        /* Endast linjen blir röd vid hover */
+        .feature-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+            background-color: #eee;
+        }
+
         .feature-card:hover {
             border-top-color: var(--red);
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .feature-card:hover .feature-img {
+            transform: scale(1.05);
         }
 
         .feature-card h3 {
@@ -159,6 +162,7 @@
 
         .feature-card p {
             margin: 0;
+            text-align: left;
         }
 
         footer {
@@ -186,7 +190,8 @@
         }
 
         @media (max-width: 768px) {
-            header { height: 120px; }
+            header { height: 120px; gap: 15px; }
+            .header-logo { width: 52px; height: 52px; }
             footer { flex-direction: column; text-align: center; height: auto; padding: 20px 0; }
             .footer-sep { display: none; }
         }
@@ -195,12 +200,12 @@
 <body>
 
     <header>
+        <img src="logo.png" alt="IO1 Logo" class="header-logo">
         <div class="header-text">IO1</div>
     </header>
 
     <main>
         <section class="hero">
-            <div class="brand-eyebrow">IO1</div>
             <h1>Inget onödigt fluff<span class="dot"></span><br>
                 <span class="highlight">Bara grym IT<span class="dot"></span></span>
             </h1>
@@ -210,14 +215,17 @@
 
         <section class="features">
             <div class="feature-card">
+                <img src="1.jpg" alt="Låga kostnader" class="feature-img">
                 <h3>Låga kostnader</h3>
                 <p>Inga flashiga kontor eller dyra säljare. Vi håller kostnaderna nere så att du får mer för pengarna.</p>
             </div>
             <div class="feature-card">
+                <img src="2.jpg" alt="Direktkontakt" class="feature-img">
                 <h3>Direktkontakt</h3>
                 <p>Skippa projektledare och mellanhänder. Du pratar direkt med experten som löser dina problem.</p>
             </div>
             <div class="feature-card">
+                <img src="3.jpg" alt="Smidiga lösningar" class="feature-img">
                 <h3>Smidiga lösningar</h3>
                 <p>Vi levererar tjänster, hårdvara och effektiva lösningar som fungerar direkt i din vardag.</p>
             </div>
