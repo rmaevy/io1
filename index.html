@@ -14,13 +14,7 @@
             --dim-gray: #444;
         }
 
-        /* 1. Logotyp Fade */
-        @keyframes logoFade {
-            0% { opacity: 0.25; }
-            100% { opacity: 1; }
-        }
-
-        /* 2. Text Slide + Fade */
+        /* 1. Text Slide + Fade */
         @keyframes textSlideFade {
             0% { 
                 opacity: 0;
@@ -32,7 +26,7 @@
             }
         }
 
-        /* 3. Linje Expand */
+        /* 2. Linje Expand */
         @keyframes lineExpand {
             0% { 
                 width: 0;
@@ -75,7 +69,8 @@
             height: 72px;
             object-fit: contain;
             display: block;
-            animation: logoFade 1s ease-out forwards;
+            /* Ingen animation här nu */
+            opacity: 1; 
         }
 
         .header-text-container {
