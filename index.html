@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IO1 - v2</title>
+    <title>IO1</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
@@ -86,7 +86,6 @@
             text-align: left;
         }
 
-        /* --- Aktivt tillstånd (Vid Klick) --- */
         .feature-card.active {
             border-top-color: var(--red);
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
@@ -97,13 +96,13 @@
         .feature-card.active .feature-img { 
             height: 100px; 
             opacity: 0.5;
-            margin-bottom: 10px; /* Minskad från 20px */
+            margin-bottom: 10px;
         }
 
         .feature-card.active .card-details {
             max-height: 800px;
             opacity: 1;
-            margin-top: 5px; /* Tajtare distans mot bilden */
+            margin-top: 5px;
         }
 
         .card-details p { color: var(--dim-gray); line-height: 1.6; margin-bottom: 15px; font-size: 0.95rem; }
