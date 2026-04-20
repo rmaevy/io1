@@ -17,7 +17,7 @@
         @keyframes lineExpand { 0% { width: 0; opacity: 0; } 1% { opacity: 1; } 100% { width: 100%; opacity: 1; } }
 
         html, body { margin: 0; padding: 0; height: 100%; background-color: var(--black); overflow-x: hidden; }
-        body { font-family: 'Inter', sans-serif; display: flex; flex-direction: column; }
+        body { font-family: 'Inter', sans-serif; display: flex; flex-direction: column; scroll-behavior: smooth; }
 
         header { height: 130px; display: flex; align-items: center; justify-content: center; background-color: var(--black); z-index: 20; animation: headerSlideUp 1s cubic-bezier(0.85, 0, 0.15, 1) forwards; gap: 20px; flex-shrink: 0; }
         .header-logo { width: 72px; height: 72px; object-fit: contain; }
@@ -58,7 +58,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            /* Förhindrar ryckighet vid scroll */
+            /* Viktigt för scroll-positionen */
             scroll-margin-top: 20px; 
         }
         
@@ -212,25 +212,30 @@
 
         cards.forEach(card => {
             card.addEventListener('click', () => {
-                const isActive = card.classList.contains('active');
+                const wasActive = card.classList.contains('active');
                 
-                // Stäng alla kort
+                // Stäng alla andra kort
                 cards.forEach(c => c.classList.remove('active'));
 
-                // Om det klickade kortet inte var aktivt, öppna det
-                if (!isActive) {
+                if (!wasActive) {
                     card.classList.add('active');
-                    
-                    // --- MOBIL-FIX FÖR SCROLL ---
-                    // Vi kollar om fönstret är under 768px (mobil)
+
+                    // MOBIL-SCROLL FIX
                     if (window.innerWidth <= 768) {
-                        // Vänta en kort stund så expansionen hunnit börja
+                        // Vi räknar ut positionen manuellt för att få det helt exakt
+                        // och triggar scrollen precis när expansionen startat
                         setTimeout(() => {
-                            card.scrollIntoView({ 
-                                behavior: 'smooth', 
-                                block: 'start' 
+                            const offset = 20; // Samma som scroll-margin-top
+                            const bodyRect = document.body.getBoundingClientRect().top;
+                            const elementRect = card.getBoundingClientRect().top;
+                            const elementPosition = elementRect - bodyRect;
+                            const offsetPosition = elementPosition - offset;
+
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
                             });
-                        }, 100);
+                        }, 50); // Liten delay för att JavaScript ska hinna lägga till 'active'
                     }
                 }
             });
