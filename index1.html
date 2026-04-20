@@ -72,7 +72,6 @@
         .hero { padding: 50px 5% 60px; text-align: center; }
         .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; margin: 0 0 20px 0; letter-spacing: -2px; line-height: 1.1; color: var(--black); }
         
-        /* DOT STIL */
         .dot {
             display: inline-block;
             width: 0.15em;
@@ -138,7 +137,13 @@
             animation: footerSlideDown 1s cubic-bezier(0.85, 0, 0.15, 1) forwards;
         }
 
-        .footer-sep { color: var(--red); margin: 0 0.5ch; font-weight: bold; }
+        /* --- FIX FÖR RÖDA PIPES PÅ MOBIL --- */
+        .footer-sep { 
+            color: var(--red) !important; 
+            margin: 0 0.5ch; 
+            font-weight: bold;
+            display: inline-block; /* Tvingar mobilen att rendera färgen rätt */
+        }
 
         @media (max-width: 768px) {
             header { height: 130px !important; }
@@ -160,7 +165,8 @@
             <h1>Inget onödigt fluff<span class="dot"></span><br>
                 <span class="highlight">Bara grym IT<span class="dot"></span></span>
             </h1>
-            <p>Vi är det lilla IT-bolaget med låga omkostnader och hög expertis.<br>Hos oss betalar du för resultat, inte för overhead.</p>
+            <p>Vi är det lilla IT-bolaget med låga omkostnader och hög expertis.<br>
+            Hos oss betalar du för resultat, inte för overhead.</p>
             <div class="cta-container">
                 <a href="mailto:info@io1.se" class="cta-button">Kontakta oss</a>
                 <a href="index.html" class="cta-button cta-button-v">v1</a>
