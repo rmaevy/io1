@@ -15,7 +15,6 @@
         }
 
         /* --- Animationer --- */
-
         @keyframes headerSlideUp {
             0% { transform: translateY(calc(50vh - 75px)); }
             100% { transform: translateY(0); }
@@ -56,14 +55,16 @@
             flex-direction: column;
         }
 
+        /* --- Header: Matchar v1 exakt --- */
         header {
-            height: 150px;
+            height: 150px; /* Samma fasta höjd som v1 */
             display: flex;
-            align-items: center;
+            align-items: center; /* Centrerar logga/text vertikalt */
             justify-content: center;
             background-color: var(--black);
             z-index: 10;
             gap: 20px;
+            flex-shrink: 0; /* Hindrar krympning */
             animation: headerSlideUp 1s cubic-bezier(0.85, 0, 0.15, 1) forwards;
         }
 
@@ -98,6 +99,7 @@
             animation: lineExpand 0.6s ease-out 1.4s forwards;
         }
 
+        /* --- Main Content --- */
         main {
             flex: 1;
             background-color: var(--white);
@@ -173,6 +175,7 @@
             transform: translateY(-2px);
         }
 
+        /* --- Feature Sektion --- */
         .features {
             padding: 40px 5%;
             background-color: var(--gray);
@@ -199,11 +202,17 @@
             object-fit: cover;
             border-radius: 4px;
             background-color: #eee;
+            transition: transform 0.3s ease;
         }
 
         .feature-card:hover {
             border-top-color: var(--red);
             transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .feature-card:hover .feature-img {
+            transform: scale(1.05);
         }
 
         .feature-card h3 {
@@ -220,6 +229,7 @@
             color: var(--dim-gray);
         }
 
+        /* --- Footer --- */
         footer {
             height: 100px;
             background-color: var(--black);
@@ -230,6 +240,7 @@
             font-family: 'Roboto Mono', monospace;
             font-size: 0.85rem;
             z-index: 10;
+            flex-shrink: 0;
             animation: footerSlideDown 1s cubic-bezier(0.85, 0, 0.15, 1) forwards;
         }
 
