@@ -37,26 +37,29 @@
         .cta-button:hover { background-color: var(--red) !important; transform: translateY(-2px); }
 
         .features { padding: 40px 5%; background-color: var(--gray); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .feature-card { background: var(--white); padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 4px solid var(--black); transition: all 0.3s ease; text-align: center; }
+        
+        .feature-card { 
+            background: var(--white); 
+            /* ÄNDRING: padding-bottom minskad från 40px till 30px för att bli 10px kortare */
+            padding: 40px 40px 30px 40px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            border-top: 4px solid var(--black); 
+            transition: all 0.3s ease; 
+            text-align: center; 
+        }
+        
         .feature-card:hover { border-top-color: var(--red); transform: translateY(-5px); }
         .feature-card h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 15px; }
         .feature-card p { text-align: left; color: var(--dim-gray); }
         .feature-img { width: 200px; height: 200px; display: block; margin: 0 auto 20px; object-fit: cover; }
 
         footer { height: 75px; min-height: 75px; background-color: var(--black); display: flex; align-items: center; justify-content: center; color: var(--white); font-family: 'Roboto Mono', monospace; font-size: 0.85rem; position: relative; animation: footerSlideDown 1s cubic-bezier(0.85, 0, 0.15, 1) forwards; flex-shrink: 0; }
-        
-        /* FIX FÖR RÖD STANDARD-PIPE */
-        .footer-sep { 
-            color: var(--red) !important; 
-            margin: 0 10px; 
-            font-weight: bold; 
-            font-family: sans-serif !important; /* Använder standard sans-serif för att undvika problem */
-            display: inline-block;
-        }
+        .footer-sep { color: var(--red) !important; margin: 0 10px; font-weight: bold; font-family: sans-serif !important; display: inline-block; }
 
         @media (max-width: 768px) { 
             footer { height: auto; min-height: 75px; padding: 20px 0; flex-direction: column; } 
-            .footer-sep { display: inline-block; margin: 5px 0; transform: rotate(0deg); } 
+            .footer-sep { display: inline-block; margin: 5px 0; } 
         }
     </style>
 </head>
