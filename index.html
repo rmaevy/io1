@@ -10,6 +10,7 @@
         :root { --red: #e61921; --black: #000000; --white: #ffffff; --gray: #f9f9f9; --dim-gray: #444; }
         * { -webkit-font-smoothing: antialiased; box-sizing: border-box; }
 
+        /* Animationer */
         @keyframes headerSlideUp { 0% { transform: translateY(calc(50vh - 65px)); } 100% { transform: translateY(0); } }
         @keyframes footerSlideDown { 0% { transform: translateY(calc(-50vh + 37.5px)); } 100% { transform: translateY(0); } }
         @keyframes mainFadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
@@ -38,56 +39,17 @@
         .cta-button:hover { background-color: var(--red) !important; transform: translateY(-2px); }
 
         .features { padding: 40px 5%; background-color: var(--gray); display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; align-items: flex-start; }
-        
-        .feature-card { 
-            background: var(--white); 
-            padding: 30px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-            border-top: 4px solid var(--black); 
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
-            text-align: center; 
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        
+        .feature-card { background: var(--white); padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 4px solid var(--black); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); text-align: center; cursor: pointer; display: flex; flex-direction: column; overflow: hidden; }
         .feature-card:hover { border-top-color: var(--red); transform: translateY(-5px); }
         .feature-card h3 { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.5px; color: var(--black); margin: 0 0 15px 0; transition: color 0.3s ease; }
+        .feature-img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; opacity: 0.5; transition: all 0.4s ease; }
+        .feature-card:hover .feature-img { opacity: 1; }
         
-        .feature-img { 
-            width: 100%; 
-            height: 200px; 
-            object-fit: cover; 
-            border-radius: 4px; 
-            opacity: 0.5; 
-            transition: all 0.4s ease; 
-        }
-
-        .feature-card:hover .feature-img {
-            opacity: 1;
-        }
-
-        .card-details {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease, opacity 0.3s ease;
-            text-align: left;
-        }
-
+        .card-details { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.5s ease, opacity 0.3s ease; text-align: left; }
         .feature-card.active { border-top-color: var(--red); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
         .feature-card.active h3 { color: var(--red); }
-        
-        .feature-card.active .feature-img { 
-            height: 100px; 
-            opacity: 1; 
-            margin-bottom: 10px; 
-        }
-
+        .feature-card.active .feature-img { height: 100px; opacity: 1; margin-bottom: 10px; }
         .feature-card.active .card-details { max-height: 800px; opacity: 1; margin-top: 5px; }
-
         .card-details p { color: var(--dim-gray); line-height: 1.6; margin-bottom: 15px; font-size: 0.95rem; }
         .feature-list { list-style: none; padding: 0; margin: 0; }
         .feature-list li { position: relative; padding-left: 25px; margin-bottom: 8px; color: var(--dim-gray); font-size: 0.9rem; }
@@ -105,7 +67,10 @@
 <body>
     <header>
         <img src="logo.png" class="header-logo">
-        <div class="header-text-container"><div class="header-text">IO1</div><div class="header-line"></div></div>
+        <div class="header-text-container">
+            <div class="header-text">IO1</div>
+            <div class="header-line"></div>
+        </div>
     </header>
     <main>
         <section class="hero">
@@ -135,7 +100,6 @@
                     </ul>
                 </div>
             </div>
-
             <div class="feature-card">
                 <h3>Direktkontakt</h3>
                 <img src="2.jpg" class="feature-img">
@@ -150,7 +114,6 @@
                     </ul>
                 </div>
             </div>
-
             <div class="feature-card">
                 <h3>Smidiga lösningar</h3>
                 <img src="3.jpg" class="feature-img">
@@ -167,8 +130,9 @@
             </div>
         </section>
     </main>
-    <footer><p>IO1 AB <span class="footer-sep">|</span> hi [a] io1.se <span class="footer-sep">|</span> SWEDEN</p></footer>
-
+    <footer>
+        <p>IO1 AB <span class="footer-sep">|</span> hi [a] io1.se <span class="footer-sep">|</span> SWEDEN</p>
+    </footer>
     <script>
         const cards = document.querySelectorAll('.feature-card');
         cards.forEach(card => {
